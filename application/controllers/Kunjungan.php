@@ -9,7 +9,7 @@ class Kunjungan extends CI_Controller {
         $this->load->model('Pasien_model');
         $this->load->model('Dokter_model');
         $this->load->model('PoliModel');
-        $this->load->model('user_model');
+        $this->load->model('User_model');
         $this->load->helper('url');
         $this->load->library('form_validation');
     }
@@ -26,7 +26,7 @@ class Kunjungan extends CI_Controller {
         $data['pasien'] = $this->Pasien_model->get_pasien();
         $data['dokter'] = $this->Dokter_model->get_dokter();
         $data['poli'] = $this->PoliModel->get_all_poli();
-        $data['users'] = $this->user_model->get_all_users();
+        $data['users'] = $this->User_model->get_all_users();
 
         $this->form_validation->set_rules('id_pasien', 'ID Pasien', 'required');
         $this->form_validation->set_rules('id_dokter', 'ID Dokter', 'required');
@@ -58,7 +58,7 @@ class Kunjungan extends CI_Controller {
     //     $data['pasien'] = $this->Pasien_model->get_all_pasien();
     //     $data['dokter'] = $this->Dokter_model->get_all_dokter();
     //     $data['poli'] = $this->PoliModel->get_all_poli();
-    //     $data['users'] = $this->user_model->get_all_users();
+    //     $data['users'] = $this->User_model->get_all_users();
     //     $data['kunjungan'] = $this->KunjunganModel->get_kunjungan_by_id($id);
 
     //     $this->form_validation->set_rules('id_pasien', 'ID Pasien', 'required');

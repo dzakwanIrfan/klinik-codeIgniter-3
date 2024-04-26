@@ -21,9 +21,10 @@ class User_model extends CI_Model {
         }
     }
 
-    public function get_al_users()
+    public function get_all_users()
     {
-        return $this->db->get('users')->result_array();
+        $query = $this->db->get('users');
+        return $query->result_array();
     }
 
 }
