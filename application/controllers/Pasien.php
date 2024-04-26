@@ -5,6 +5,7 @@ class Pasien extends CI_Controller {
         parent::__construct();
         $this->load->model('pasien_model');
         $this->load->helper('url_helper');
+        $this->load->model('User_model');
     }
     public function index()
     {
@@ -38,6 +39,7 @@ class Pasien extends CI_Controller {
             $data['nama'] = $this->input->post('nama');
             $data['tanggal_lahir'] = $this->input->post('tanggal_lahir');
             $data['alamat'] = $this->input->post('alamat');
+            $data['users'] = $this->User_model->get_all_users();
 
             $this->load->view('templates/header', $data);
             $this->load->view('pasien/create');
@@ -52,7 +54,7 @@ class Pasien extends CI_Controller {
 
     public function delete($id)
     {
-        $this->db->delete('pasien', array('id' => $id));
+        $this->db->delete('pasien', array('id_pasien' => $id));
         redirect('/pasien/index');
     }
 
@@ -61,20 +63,23 @@ class Pasien extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('judul', 'Judul pasien', 'required');
-        $this->form_validation->set_rules('pengarang', 'Pengarang pasien', 'required');
-        $this->form_validation->set_rules('isbn', 'ISBN pasien', 'required|min_length[13]|numeric');
+        $this->form_validation->set_rules('nama', 'Nama Pasien', 'required');
+        $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('id_user', 'Id User', 'required');
 
         $data = array(
             'title' => 'pasien',
-            'judul' => '',
-            'pengarang' => '',
-            'isbn' => ''
+            'nama' => '',
+            'tanggal_lahir' => '',
+            'alamt' => '',
+            'id_user' => ''
         );
 
         if ($this->form_validation->run() === FALSE)
         {
             $data['pasien'] = $this->pasien_model->get_pasien($id);
+            $data['users'] = $this->User_model->get_all_users();
 
             $this->load->view('templates/header', $data);
             $this->load->view('pasien/edit', $data);
@@ -82,17 +87,19 @@ class Pasien extends CI_Controller {
         }
         else
         {
-            $judul = $this->input->post('judul');
-            $pengarang = $this->input->post('pengarang');
-            $isbn = $this->input->post('isbn');
+            $nama = $this->input->post('nama');
+            $alamat = $this->input->post('alamat');
+            $tanggal_lahir = $this->input->post('tanggal_lahir');
+            $id_user = $this->input->post('id_user');
 
             $data = array(
-                'judul' => $judul,
-                'pengarang' => $pengarang,
-                'isbn' => $isbn,
+                'nama' => $nama,
+                'alamat' => $alamat,
+                'tanggal_lahir' => $tanggal_lahir,
+                'id_user' => $id_user,
             );
 
-            $this->db->where('id', $id);
+            $this->db->where('id_pasien', $id);
             $this->db->update('pasien', $data);
             redirect('/pasien/index');
         }

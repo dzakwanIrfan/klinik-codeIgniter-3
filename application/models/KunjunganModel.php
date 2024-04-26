@@ -10,7 +10,14 @@ class KunjunganModel extends CI_Model {
 
     // Get all kunjungan
     public function get_all_kunjungan() {
-        return $this->db->get('kunjungan')->result_array();
+        $this->db->select('kunjungan.*, pasien.nama AS nama_pasien, dokter.nama_dokter, poli.nama_poli, users.username AS nama_user');
+        $this->db->from('kunjungan');
+        $this->db->join('pasien', 'pasien.id_pasien = kunjungan.id_pasien');
+        $this->db->join('dokter', 'dokter.id_dokter = kunjungan.id_dokter');
+        $this->db->join('poli', 'poli.id_poli = kunjungan.id_poli');
+        $this->db->join('users', 'users.id_user = kunjungan.id_user');
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     // Get kunjungan by id

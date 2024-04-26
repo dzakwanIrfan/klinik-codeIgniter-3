@@ -1,23 +1,32 @@
 <div class="container row mx-auto">
     <div class="col-md-8 mx-auto">
-        <h1>Edit Buku</h1>
-        <?php echo form_open('buku/edit/'.$buku['id']); ?>
+        <h1>Tambah Pasien</h1>
+        <?php echo form_open('pasien/edit/'.$pasien['id_pasien']); ?>
         <div class="mb-3">
-          <label for="judul" class="form-label">Judul Buku</label>
-          <input type="text" class="form-control" id="judul" name="judul" value="<?= $buku['judul'] ?>">
-          <div class="text-danger"><?php echo form_error('judul'); ?></div>
+          <label for="nama" class="form-label">Nama Pasien</label>
+          <input type="text" class="form-control" id="nama" name="nama" value="<?= $pasien['nama'] ?>">
+          <div class="text-danger"><?php echo form_error('nama'); ?></div>
         </div>
         <div class="mb-3">
-          <label for="pengarang" class="form-label">Pengarang Buku</label>
-          <input type="text" class="form-control" id="pengarang" name="pengarang" value="<?= $buku['pengarang'] ?>">
-          <div class="text-danger"><?php echo form_error('pengarang'); ?></div>
+          <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+          <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?= $pasien['tanggal_lahir'] ?>">
+          <div class="text-danger"><?php echo form_error('tanggal_lahir'); ?></div>
         </div>
         <div class="mb-3">
-          <label for="isbn" class="form-label">ISBN Buku</label>
-          <input type="text" class="form-control" id="isbn" name="isbn" value="<?= $buku['isbn'] ?>">
-          <div class="text-danger"><?php echo form_error('isbn'); ?></div>
+          <label for="alamat" class="form-label">Alamat</label>
+          <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $pasien['alamat'] ?>">
+          <div class="text-danger"><?php echo form_error('alamat'); ?></div>
         </div>
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <div class="form-group">
+            <label for="id_user">ID User:</label>
+            <select class="form-control" name="id_user" id="id_user" required>
+                <option value="" selected disabled>Select User</option>
+                <?php foreach ($users as $row): ?>
+                    <option value="<?= $row['id_user']; ?>"><?= $row['username']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
 </div>

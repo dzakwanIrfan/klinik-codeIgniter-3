@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Poli</title>
-</head>
-<body>
-    <h1>Add Poli</h1>
-    <?php echo validation_errors(); ?>
-    <?php echo form_open('poli/add'); ?>
-        <label for="nama_poli">Nama Poli:</label>
-        <input type="text" name="nama_poli" id="nama_poli" required><br>
-        <button type="submit">Add</button>
-    <?php echo form_close(); ?>
-</body>
-</html>
+<div class="container row mx-auto">
+    <div class="col-md-8 mx-auto">
+        <h1>Tambah Poli</h1>
+        <?php echo form_open('poli/add'); ?>
+        <div class="mb-3">
+          <label for="nama_poli" class="form-label">Nama Poli</label>
+          <input type="text" class="form-control" id="nama_poli" name="nama_poli" value="<?php echo isset($nama_poli) ? $nama_poli : ''; ?>">
+          <div class="text-danger"><?php echo form_error('nama_poli'); ?></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+</div>

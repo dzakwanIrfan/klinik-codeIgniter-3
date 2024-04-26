@@ -40,7 +40,10 @@ class Poli extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $data['poli'] = $this->PoliModel->get_poli_by_id($id);
+            $data['title'] = 'poli';
+            $this->load->view('templates/header', $data);
             $this->load->view('poli/edit', $data);
+            $this->load->view('templates/footer', $data);
         } else {
             $data = array(
                 'nama_poli' => $this->input->post('nama_poli')
